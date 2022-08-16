@@ -225,7 +225,7 @@ with col1:
                         if moll is not None:
                             nonan_smiles.append(Chem.MolToSmiles(moll))
                             nonan_ids.append(df.iloc[index,0])
-                    # sledici korak je kreirati novi df a obrisati prethodni
+                    # create new df
                     df_smiles_novi = pd.DataFrame(nonan_smiles, columns=['SMILES'])
                     df_smiles_novi['ID'] = nonan_ids
                     # df_smiles_novi
