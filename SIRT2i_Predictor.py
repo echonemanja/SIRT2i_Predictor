@@ -229,8 +229,8 @@ with col1:
                     df_smiles_novi = pd.DataFrame(nonan_smiles, columns=['SMILES'])
                     df_smiles_novi['ID'] = nonan_ids
                     # df_smiles_novi
-                    #################### nisi dodao iznad kod odbacivanja IDs losih jedinjenja #################
-                    # kanonizacija
+                    #####################################
+                    # canonization
                     smiles_canon = []
                     df_smiles_novi['SMILES_canon'] = [Chem.MolToSmiles(Chem.MolFromSmiles(n)) for n in nonan_smiles]
                     # df_smiles_novi
@@ -253,10 +253,10 @@ with col1:
                     fp = [AllChem.GetMorganFingerprintAsBitVect(mol, 2, nBits=1024) for mol in mols if mol is not None]
                     df_FP = pd.DataFrame(np.array(fp))
                     df_FP = pd.concat([df_smiles_novi, df_FP], axis=1)
-                    #resetovanje indeksa nakon uklanjanja duplikata
+                    #reset index
                     df_FP.reset_index(drop = True, inplace=True)
                     X = df_FP.iloc[:, 2:]
-                    ###################### validiraj kod iznad tako sto ces dodati duplikate i strukture sa losim smiles-ovima i prazna mesta############
+                    ##################################
                     model_qsar = XGBRegressor()
                     model_qsar.load_model('./models/XGBoost_ecfp4_qsar.json')
                     #model_binary = XGBClassifier()
@@ -306,12 +306,11 @@ with col2:
                 if moll is not None:
                     nonan_smiles.append(Chem.MolToSmiles(moll))
             # nonan_smiles
-            # sledici korak je kreirati novi df a obrisati prethodni
             df_smiles_novi = pd.DataFrame(nonan_smiles, columns=['SMILES'])
             ids2 = ['ID_' + str(x) for x in range(len(nonan_smiles))]
             df_smiles_novi['ID'] = ids2
             # df_smiles_novi
-            # kanonizacija
+            # canonization
             smiles_canon = []
             df_smiles_novi['SMILES_canon'] = [Chem.MolToSmiles(Chem.MolFromSmiles(n)) for n in nonan_smiles]
             # df_smiles_novi
@@ -336,7 +335,7 @@ with col2:
             df_FP = pd.DataFrame(np.array(fp))
             df_FP = pd.concat([df_smiles_novi, df_FP], axis=1)
             X = df_FP.iloc[:, 2:]
-            ###################### Racunanje deskritora SIRT12##################333
+            ###################### OLD CODE ##################
             #calc = Calculator(descriptors, ignore_3D=True)
             #mols_sirt12 = [Chem.MolFromSmiles(smi) for smi in df_smiles_novi.SMILES]
             #df_descript_sirt12 = calc.pandas(mols_sirt12)
@@ -348,7 +347,7 @@ with col2:
             #final_descr_sirt12 = df1_normalized[data.iloc[:, 4:].columns]
             #X_sirt12 = final_descr_sirt12.iloc[:, :]
             #X_sirt12 = X_sirt12.replace(np.nan, 0)
-            ##########################Racunanje deskritora SIRT23######################
+            ##########################Descriptors calc for sirt23 model######################
             calc = Calculator(descriptors, ignore_3D=True)
             mols_sirt23 = [Chem.MolFromSmiles(smi) for smi in df_smiles_novi.SMILES]
             df_descript_sirt23 = calc.pandas(mols_sirt23)
@@ -380,11 +379,7 @@ with col2:
             Y_sirt12 = pd.DataFrame(model_sirt12.predict(X), columns=['Model 3: SIRT1/2 selectivity'])
             Y_sirt12.replace({0: 'SIRT1/2 nonselective', 1: 'Selective for SIRT2 over SIRT1',
                               2: 'Predicted to be inactive on both SIRT1/SIRT2'}, inplace=True)
-            #for index, report in Y_sirt12.iterrows():
-            #    if Y_sirt12.loc[index][0] == 'Predicted to be inactive on both SIRT1/SIRT2':
-            #        if Y_binary.loc[index][0] == 'Yes':
-            #            Y_sirt12.loc[index].replace({'Predicted to be inactive on both SIRT1/SIRT2': 'Uncertain'},
-            #                                        inplace=True)
+            
             Y_sirt12_prob = pd.DataFrame(model_sirt12.predict_proba(X)[:, 0], columns=['Probability of Model 3 SIRT1/2 nonselective prediction'])
             Y_sirt12_prob['Probability of Model 3 SIRT2/1 selectivity'] = model_sirt12.predict_proba(X)[:, 1]
             Y_sirt12_prob['Probability of Model 3 SIRT1/2 inactivity'] = model_sirt12.predict_proba(X)[:, 2]
@@ -393,11 +388,7 @@ with col2:
                                     columns=['Model 4: SIRT2/3 selectivity'])
             Y_sirt23.replace({0: 'SIRT2/3 nonselective', 1: 'Selective for SIRT2 over SIRT3',
                               2: 'Predicted to be inactive on both SIRT2/SIRT3'}, inplace=True)
-            #for index, report in Y_sirt23.iterrows():
-            #    if Y_sirt23.loc[index][0] == 'Predicted to be inactive on both SIRT2/SIRT3':
-            #        if Y_binary.loc[index][0] == 'Yes':
-            #            Y_sirt23.loc[index].replace({'Predicted to be inactive on both SIRT2/SIRT3': 'Uncertain'},
-            #                                        inplace=True)
+       
             Y_sirt23_prob = pd.DataFrame(model_sirt23.predict(X_sirt23)[:, 0],
                                          columns=['Probability of Model 4 SIRT2/3 nonselective prediction'])
             Y_sirt23_prob['Probability of Model 4 SIRT2/3 selectivity'] = model_sirt23.predict(X_sirt23)[:, 1]
@@ -431,7 +422,7 @@ with col2:
             choice = st.selectbox('', solutions)
             submit_button = st.form_submit_button(label='Calculate for selected')
             if submit_button:
-         ####################### molecule image######################
+         ####################### molecule img######################
                 with col3:
                     #st.title(" \n  ")
                     #st.title(" \n  ")
