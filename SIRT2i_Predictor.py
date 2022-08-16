@@ -92,7 +92,7 @@ def tanimoto_ad(ligand_smi):
 
     ad_X = pd.DataFrame(list(ref_fp)).T
     X_internal = pd.read_csv('./helpers/X_internal.csv').set_index('Unnamed: 0')
-    list_importance = pd.read_csv('list_importance.csv').set_index('Unnamed: 0')
+    list_importance = pd.read_csv('./helpers/list_importance.csv').set_index('Unnamed: 0')
     list_important_descriptors = [str(x) for x in list(list_importance.iloc[:, 0])]
     X_internal = X_internal[list_important_descriptors]
     ad_X = ad_X[list(list_importance.iloc[:, 0])]
