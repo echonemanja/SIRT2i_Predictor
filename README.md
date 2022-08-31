@@ -29,7 +29,9 @@ SIRT2i_Predictor is now previewed in your default web browser.
 Results of predictions are written to the ./results folder. 
 
 ### Video tutorial
-https://github.com/echonemanja/SIRT2i_Predictor/blob/main/Video_preview.mp4
+
+https://user-images.githubusercontent.com/109313212/187770205-1e1d844a-0e62-4261-929d-bca7c091d1c8.mp4
+
 
 Good luck!
 
