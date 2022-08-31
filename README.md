@@ -28,6 +28,8 @@ Then run command:
 SIRT2i_Predictor is now previewed in your default web browser.
 Results of predictions are written to the ./results folder. 
 
+### Video tutorial
+https://github.com/echonemanja/SIRT2i_Predictor/blob/main/Video_preview.mp4
 
 Good luck!
 
