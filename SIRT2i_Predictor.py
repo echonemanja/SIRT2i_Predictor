@@ -209,86 +209,89 @@ with col1:
         uploaded_file = st.file_uploader('Upload CSV file with IDs (first column) and SMILES (second column)', type='csv')
         submit_button_vs = st.form_submit_button(label='Submit')
         st.caption('Results of the virtual screening are written to the file "results_vs_*.csv".')
-        if uploaded_file is not None:
-            if submit_button_vs:
-                try:
-                    df = pd.read_csv(uploaded_file)
-                    df.dropna(inplace=True)
-                    df.reset_index(drop = True, inplace=True)
-                    mols1 = []
-                    for index, row in df.iterrows():
-                        mols1.append(Chem.MolFromSmiles(row[1]))
-                    df['Mols'] = mols1
-                    nonan_smiles = []
-                    nonan_ids = []
-                    for index, moll in df['Mols'].iteritems():
-                        if moll is not None:
-                            nonan_smiles.append(Chem.MolToSmiles(moll))
-                            nonan_ids.append(df.iloc[index,0])
-                    # create new df
-                    df_smiles_novi = pd.DataFrame(nonan_smiles, columns=['SMILES'])
-                    df_smiles_novi['ID'] = nonan_ids
-                    # df_smiles_novi
-                    #####################################
-                    # canonization
-                    smiles_canon = []
-                    df_smiles_novi['SMILES_canon'] = [Chem.MolToSmiles(Chem.MolFromSmiles(n)) for n in nonan_smiles]
-                    # df_smiles_novi
-                    # Uncharger
-                    un = rdMolStandardize.Uncharger()
-                    mols2 = []
-                    for smile in df_smiles_novi['SMILES_canon']:
-                        mols2.append(Chem.MolFromSmiles(smile))
-                    smiles_uni = [Chem.MolToSmiles(un.uncharge(mol)) for mol in mols2]
-                    df_smiles_novi['SMILES_uni'] = smiles_uni
-                    df_smiles_novi.drop_duplicates(subset=['SMILES_uni'], inplace=True)
-                    df_smiles_novi.reset_index(drop = True, inplace = True)
-                    df_smiles_novi.drop(labels=['SMILES', 'SMILES_canon'], inplace=True, axis=1)
-                    df_smiles_novi.rename(columns={'SMILES_uni': 'SMILES'}, inplace=True)
-                    mols = [Chem.MolFromSmiles(smi) for smi in df_smiles_novi.SMILES]
-                    locs = list_duplicates_of(mols, None)
-                    df_smiles_novi.drop(labels = locs, inplace = True)
-                    df_smiles_novi.reset_index(inplace=True)
-                    df_smiles_novi.drop(columns=['index'], inplace=True)
-                    fp = [AllChem.GetMorganFingerprintAsBitVect(mol, 2, nBits=1024) for mol in mols if mol is not None]
-                    df_FP = pd.DataFrame(np.array(fp))
-                    df_FP = pd.concat([df_smiles_novi, df_FP], axis=1)
-                    #reset index
-                    df_FP.reset_index(drop = True, inplace=True)
-                    X = df_FP.iloc[:, 2:]
-                    ##################################
-                    model_qsar = XGBRegressor()
-                    model_qsar.load_model('./models/XGBoost_ecfp4_qsar.json')
-                    #model_binary = XGBClassifier()
-                    #model_binary.load_model('XGBoost_smote.json')
-                    model_binary = load('./models/RF_binary_ecfp4_model.sav')
-                    Y_binary = pd.DataFrame(model_binary.predict(X), columns=['Model 1: SIRT2 inhibitory activity'])
-                    Y_binary.replace({0: 'No', 1: 'Yes'}, inplace=True)
-                    Y_binary_prob = pd.DataFrame(model_binary.predict_proba(X)[:, 1],
-                                                 columns=['Probability of Model 1 "Yes" class prediction'])
-                    #Y_binary_prob_for_radchart = pd.DataFrame(list(Y_binary_prob.iloc[:, 0]),
-                    #                                          columns=['Probability of SIRT2 activity'])
-                    #for index, report in Y_binary_prob.iterrows():
-                    #    if Y_binary.loc[index][0] == 'No':
-                    #        Y_binary_prob.loc[index] = model_binary.predict_proba(X)[index, 0]
-                    #Y_qsar = pd.DataFrame(model_qsar.predict(X), columns=['Model 2: pIC50 (SIRT2)'])
-                    now = datetime.now()
-                    dt_string = now.strftime("%d_%m_%Y_%H_%M_%S")
-                    solutions = pd.concat(
-                        [df_FP['ID'], df_FP['SMILES'], Y_binary,Y_binary_prob['Probability of Model 1 "Yes" class prediction']], axis=1)
-                    solutions
-                    solutions.to_csv('./results/results_vs_'+ str(dt_string)+'.csv')
-                    st.download_button(
-                         label="Download results as CSV",
-                         data=solutions,
-                         file_name='results_vs_'+ str(dt_string)+'.csv',
-                         mime='text/csv',
-                     )
-                    st.write('Results should be ranked according to the Probability score.')
-                    st.write(
-                        'For more detailed analysis of potency and selectivity, copy specific SMILES (or list of SMILES) to the "SMILES-Analyzer Module".')
-                except Exception as e:
-                    print(e)
+    if uploaded_file is not None:
+        if submit_button_vs:
+            #try:
+            df = pd.read_csv(uploaded_file)
+            df.dropna(inplace=True)
+            df.reset_index(drop = True, inplace=True)
+            mols1 = []
+            for index, row in df.iterrows():
+                mols1.append(Chem.MolFromSmiles(row[1]))
+            df['Mols'] = mols1
+            nonan_smiles = []
+            nonan_ids = []
+            for index, moll in df['Mols'].iteritems():
+                if moll is not None:
+                    nonan_smiles.append(Chem.MolToSmiles(moll))
+                    nonan_ids.append(df.iloc[index,0])
+            # create new df
+            df_smiles_novi = pd.DataFrame(nonan_smiles, columns=['SMILES'])
+            df_smiles_novi['ID'] = nonan_ids
+            # df_smiles_novi
+            #####################################
+            # canonization
+            smiles_canon = []
+            df_smiles_novi['SMILES_canon'] = [Chem.MolToSmiles(Chem.MolFromSmiles(n)) for n in nonan_smiles]
+            # df_smiles_novi
+            # Uncharger
+            un = rdMolStandardize.Uncharger()
+            mols2 = []
+            for smile in df_smiles_novi['SMILES_canon']:
+                mols2.append(Chem.MolFromSmiles(smile))
+            smiles_uni = [Chem.MolToSmiles(un.uncharge(mol)) for mol in mols2]
+            df_smiles_novi['SMILES_uni'] = smiles_uni
+            df_smiles_novi.drop_duplicates(subset=['SMILES_uni'], inplace=True)
+            df_smiles_novi.reset_index(drop = True, inplace = True)
+            df_smiles_novi.drop(labels=['SMILES', 'SMILES_canon'], inplace=True, axis=1)
+            df_smiles_novi.rename(columns={'SMILES_uni': 'SMILES'}, inplace=True)
+            mols = [Chem.MolFromSmiles(smi) for smi in df_smiles_novi.SMILES]
+            locs = list_duplicates_of(mols, None)
+            df_smiles_novi.drop(labels = locs, inplace = True)
+            df_smiles_novi.reset_index(inplace=True)
+            df_smiles_novi.drop(columns=['index'], inplace=True)
+            fp = [AllChem.GetMorganFingerprintAsBitVect(mol, 2, nBits=1024) for mol in mols if mol is not None]
+            df_FP = pd.DataFrame(np.array(fp))
+            df_FP = pd.concat([df_smiles_novi, df_FP], axis=1)
+            #reset index
+            df_FP.reset_index(drop = True, inplace=True)
+            X = df_FP.iloc[:, 2:]
+            ##################################
+            model_qsar = XGBRegressor()
+            model_qsar.load_model('./models/XGBoost_ecfp4_qsar.json')
+            #model_binary = XGBClassifier()
+            #model_binary.load_model('XGBoost_smote.json')
+            model_binary = load('./models/RF_binary_ecfp4_model.sav')
+            Y_binary = pd.DataFrame(model_binary.predict(X), columns=['Model 1: SIRT2 inhibitory activity'])
+            Y_binary.replace({0: 'No', 1: 'Yes'}, inplace=True)
+            Y_binary_prob = pd.DataFrame(model_binary.predict_proba(X)[:, 1],
+                                         columns=['Probability of Model 1 "Yes" class prediction'])
+            #Y_binary_prob_for_radchart = pd.DataFrame(list(Y_binary_prob.iloc[:, 0]),
+            #                                          columns=['Probability of SIRT2 activity'])
+            #for index, report in Y_binary_prob.iterrows():
+            #    if Y_binary.loc[index][0] == 'No':
+            #        Y_binary_prob.loc[index] = model_binary.predict_proba(X)[index, 0]
+            #Y_qsar = pd.DataFrame(model_qsar.predict(X), columns=['Model 2: pIC50 (SIRT2)'])
+            now = datetime.now()
+            dt_string = now.strftime("%d_%m_%Y_%H_%M_%S")
+            solutions = pd.concat(
+                [df_FP['ID'], df_FP['SMILES'], Y_binary,Y_binary_prob['Probability of Model 1 "Yes" class prediction']], axis=1)
+            solutions
+            solutions.to_csv('./results/results_vs_'+ str(dt_string)+'.csv')
+            solutions_out = solutions.to_csv().encode('utf-8')
+            
+            st.write('Results should be ranked according to the Probability score.')
+            st.write(
+                'For more detailed analysis of potency and selectivity, copy specific SMILES (or list of SMILES) to the "SMILES-Analyzer Module".')
+            st.download_button(
+                     label='Download',
+                     data=solutions_out,
+                     file_name='results_vs_'+ str(dt_string)+'.csv',
+                     mime='text/csv')
+            #except Exception as e:
+               # print(e)
+                
+    
 with col2:
     st.header("SMILES-Analyzer Module")
     with st.form('Form_descriptors_calc'):
