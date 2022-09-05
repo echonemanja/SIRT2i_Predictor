@@ -278,6 +278,12 @@ with col1:
                         [df_FP['ID'], df_FP['SMILES'], Y_binary,Y_binary_prob['Probability of Model 1 "Yes" class prediction']], axis=1)
                     solutions
                     solutions.to_csv('./results/results_vs_'+ str(dt_string)+'.csv')
+                    st.download_button(
+                         label="Download results as CSV",
+                         data=solutions,
+                         file_name='results_vs_'+ str(dt_string)+'.csv',
+                         mime='text/csv',
+                     )
                     st.write('Results should be ranked according to the Probability score.')
                     st.write(
                         'For more detailed analysis of potency and selectivity, copy specific SMILES (or list of SMILES) to the "SMILES-Analyzer Module".')
