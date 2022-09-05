@@ -2,4 +2,5 @@ rdkit>=2022.03
 mordred>=1.2
 xgboost
 matplotlib
+joblib
 tensorflow>=2.8.2
