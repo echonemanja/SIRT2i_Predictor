@@ -284,7 +284,7 @@ with col1:
             st.write(
                 'For more detailed analysis of potency and selectivity, copy specific SMILES (or list of SMILES) to the "SMILES-Analyzer Module".')
             st.download_button(
-                     label='Download',
+                     label='Download VS results',
                      data=solutions_out,
                      file_name='results_vs_'+ str(dt_string)+'.csv',
                      mime='text/csv')
