@@ -1,4 +1,4 @@
-rdkit=2022.03
-mordred=1.2
+rdkit>=2022.03
+mordred>=1.2
 py-xgboost-cpu
-tensorflow=2.8.2
+tensorflow>=2.8.2
