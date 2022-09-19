@@ -1,7 +1,8 @@
 # SIRT2i_Predictor
 ## SIRT2i_Predictor: A machine learning-based tool to facilitate the discovery of novel SIRT2 inhibitors
 
-This repository contains code and accompanyed ML models described in this [work](https://doi.org/10.26434/chemrxiv-2022-8q749)
+This repository contains code and accompanyed ML models described in this work:<br/> 
+> Djokovic, N., Rahnasto-Rilla, M., Lougiakis, N., Lahtela-Kakkonen, M. & Nikolic, K. SIRT2i_Predictor: A machine learning-based tool to facilitate the discovery of novel SIRT2 inhibitors. (2022) [doi:10.26434/chemrxiv-2022-8q749](https://doi.org/10.26434/chemrxiv-2022-8q749).
 
 Demo of the application: [SIRT2i_Predictor](https://echonemanja-sirt2i-predictor-sirt2i-predictor-853tk4.streamlitapp.com/)
 
@@ -25,7 +26,7 @@ directory using the terminal with active sirt2i_predictor_test environment (step
 Then run:
 	`streamlit run ./SIRT2i_Predictor.py`
 
-SIRT2i_Predictor is now previewed in your default web browser.
+SIRT2i_Predictor is then previewed in your default web browser.
 
 Results of predictions are written to the ./results folder. 
 
