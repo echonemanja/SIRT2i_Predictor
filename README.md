@@ -4,7 +4,7 @@
 This repository contains code and accompanyed ML models described in this work:<br/> 
 > Djokovic, N., Rahnasto-Rilla, M., Lougiakis, N., Lahtela-Kakkonen, M. & Nikolic, K. SIRT2i_Predictor: A machine learning-based tool to facilitate the discovery of novel SIRT2 inhibitors. (2022) [doi:10.26434/chemrxiv-2022-8q749](https://doi.org/10.26434/chemrxiv-2022-8q749).
 
-Demo of the application: [SIRT2i_Predictor](https://echonemanja-sirt2i-predictor-sirt2i-predictor-853tk4.streamlitapp.com/)
+Application is deployed on the Streamlit cloud for demo: [SIRT2i_Predictor](https://echonemanja-sirt2i-predictor-sl-cloud-sirt2i-predictor-88n0qw.streamlitapp.com/)
 
 The code is written in Python. 
 Current installation instructions for SIRT2i_Predictor are tested on Linux/UNIX and Windows. 
