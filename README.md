@@ -1,5 +1,5 @@
-# SIRT2i_Predictor
-## SIRT2i_Predictor: A machine learning-based tool to facilitate the discovery of novel SIRT2 inhibitors
+
+# SIRT2i_Predictor: A machine learning-based tool to facilitate the discovery of novel SIRT2 inhibitors
 
 This repository contains code and accompanyed ML models described in this work:<br/> 
 > Djokovic, N., Rahnasto-Rilla, M., Lougiakis, N., Lahtela-Kakkonen, M. & Nikolic, K. SIRT2i_Predictor: A machine learning-based tool to facilitate the discovery of novel SIRT2 inhibitors. (2022) [doi:10.26434/chemrxiv-2022-8q749](https://doi.org/10.26434/chemrxiv-2022-8q749).
