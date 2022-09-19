@@ -21,7 +21,7 @@ Installing the dependences: <br />
 	 6. `conda install tensorflow=2.8.2` <br />
 	 7. `conda install streamlit=1.10.0 -c conda-forge` <br />
 
-To run the SIRT2i_Predictor, unizip the SIRT2i_Predictor and navigate to the SIRT2i_Predictor's 
+To run the SIRT2i_Predictor, unzip the SIRT2i_Predictor and navigate to the SIRT2i_Predictor's 
 directory using the terminal with active sirt2i_predictor_test environment (step 2 from instructions).
 Then run:
 	`streamlit run ./SIRT2i_Predictor.py`
