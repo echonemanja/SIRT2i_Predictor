@@ -1,31 +1,32 @@
 # SIRT2i_Predictor
 ## SIRT2i_Predictor: A machine learning-based tool to facilitate the discovery of novel SIRT2 inhibitors
 
-Installation instructions for SIRT2i_Predictor
+This repository contains code and accompanyed ML models described in this [work](https://doi.org/10.26434/chemrxiv-2022-8q749)
 
-SIRT2i_Predictor was tested on Linux and Windows, but it should be
-platform-independent since it was written in Python.
+Demo of the application: [SIRT2i_Predictor](https://echonemanja-sirt2i-predictor-sirt2i-predictor-853tk4.streamlitapp.com/)
 
-For proper function, all dependences should be installed. 
+The code is written in Python. 
+Current installation instructions for SIRT2i_Predictor are tested on Linux/UNIX and Windows. 
 
+## Installation instructions for SIRT2i_Predictor
+
+Desired way to run the application is within conda environments with installed dependences (requires prior installation of [Anaconda](https://www.anaconda.com/), or [Miniconda](https://conda.io/miniconda.html)).<br />
 Installing the dependences: <br />
-	Desired way is to so is by using conda environment. <br />
-	 1. Install Anaconda for your OS (https://docs.anaconda.com/anaconda/installl) <br />
-	 2. Open Anaconda Powershell Prompt (or just terminal for Linux users) <br />
-	 3. conda create -n sirt2i_predictor_test python=3.10 <br />
-	 4. conda activate sirt2i_predictor_test <br />
-	 5. conda install rdkit=2022.03 -c conda-forge <br />
-	 6. conda install -c rdkit -c mordred-descriptor mordred=1.2 <br />
-	 7. conda install -c conda-forge py-xgboost-cpu <br />
-	 8. conda install tensorflow=2.8.2 <br />
-	 9. conda install streamlit=1.10.0 -c conda-forge <br />
+	 1. `conda create -n sirt2i_predictor_test python=3.10` <br />
+	 2. `conda activate sirt2i_predictor_test` <br />
+	 3. `conda install rdkit=2022.03 -c conda-forge` <br />
+	 4. `conda install -c rdkit -c mordred-descriptor mordred=1.2` <br />
+	 5. `conda install -c conda-forge py-xgboost-cpu` <br />
+	 6. `conda install tensorflow=2.8.2` <br />
+	 7. `conda install streamlit=1.10.0 -c conda-forge` <br />
 
 To run the SIRT2i_Predictor, unizip the SIRT2i_Predictor and navigate to the SIRT2i_Predictor's 
-directory using the terminal with active sirt2i_predictor_test environment (step 4 from dependences instructions).
-Then run command:
-	streamlit run .\SIRT2i_Predictor.py
+directory using the terminal with active sirt2i_predictor_test environment (step 2 from instructions).
+Then run:
+	`streamlit run ./SIRT2i_Predictor.py`
 
 SIRT2i_Predictor is now previewed in your default web browser.
+
 Results of predictions are written to the ./results folder. 
 
 ### Video tutorial
