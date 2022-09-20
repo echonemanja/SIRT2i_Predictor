@@ -13,13 +13,14 @@ Current installation instructions for SIRT2i_Predictor are tested on Linux/UNIX 
 
 Desired way to run the application is within conda environments with installed dependences (requires prior installation of [Anaconda](https://www.anaconda.com/), or [Miniconda](https://conda.io/miniconda.html)).<br />
 Installing the dependences: <br />
-	 1. `conda create -n sirt2i_predictor_test python=3.10` <br />
-	 2. `conda activate sirt2i_predictor_test` <br />
-	 3. `conda install rdkit=2022.03 -c conda-forge` <br />
-	 4. `conda install -c rdkit -c mordred-descriptor mordred=1.2` <br />
-	 5. `conda install -c conda-forge py-xgboost-cpu` <br />
-	 6. `conda install tensorflow=2.8.2` <br />
-	 7. `conda install streamlit=1.10.0 -c conda-forge` <br />
+	 1. `conda create -n sirt2i_predictor python=3.9` <br />
+	 2. `conda activate sirt2i_predictor` <br />
+	 3. `conda install -c conda-forge rdkit` <br />
+	 4. `conda install -c conda-forge scikit-learn` <br />
+	 5. `conda install -c conda-forge tensorflow-cpu` <br />
+	 6. `conda install -c conda-forge mordred` <br />
+	 7. `conda install -c conda-forge xgboost` <br />
+	 8. `python -m pip install streamlit`
 
 To run the SIRT2i_Predictor, unzip the SIRT2i_Predictor and navigate to the SIRT2i_Predictor's 
 directory using the terminal with active sirt2i_predictor_test environment (step 2 from instructions).
