@@ -11,7 +11,7 @@ Current installation instructions for SIRT2i_Predictor are tested on Linux/UNIX 
 
 ## Installation instructions for SIRT2i_Predictor
 
-Desired way to run the application is within conda environments with installed dependences (requires prior installation of [Anaconda](https://www.anaconda.com/), or [Miniconda](https://conda.io/miniconda.html)).<br />
+Desired way to run the application is within conda environment with installed dependences (requires prior installation of [Anaconda](https://www.anaconda.com/), or [Miniconda](https://conda.io/miniconda.html)).<br />
 Installing the dependences: <br />
 	 1. `conda create -n sirt2i_predictor python=3.9` <br />
 	 2. `conda activate sirt2i_predictor` <br />
