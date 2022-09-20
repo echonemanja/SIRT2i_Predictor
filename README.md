@@ -17,7 +17,7 @@ Installing the dependences: <br />
 	 2. `conda activate sirt2i_predictor` <br />
 	 3. `conda install -c conda-forge rdkit` <br />
 	 4. `conda install -c conda-forge scikit-learn` <br />
-	 5. `conda install -c conda-forge tensorflow-cpu` <br />
+	 5. `python -m pip install tensorflow-cpu` or `conda install -c conda-forge tensorflow-cpu` (Using `tensorflow` instead `tensorflow-cpu` works as well, but sometimes requires more memory); <br />
 	 6. `conda install -c conda-forge mordred` <br />
 	 7. `conda install -c conda-forge xgboost` <br />
 	 8. `python -m pip install streamlit`
