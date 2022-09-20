@@ -23,7 +23,7 @@ Installing the dependences: <br />
 	 8. `python -m pip install streamlit`
 
 To run the SIRT2i_Predictor, unzip the SIRT2i_Predictor and navigate to the SIRT2i_Predictor's 
-directory using the terminal with active sirt2i_predictor_test environment (step 2 from instructions).
+directory using the terminal with active sirt2i_predictor environment (step 2 from instructions).
 Then run:
 	`streamlit run ./SIRT2i_Predictor.py`
 
