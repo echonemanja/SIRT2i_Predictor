@@ -2,7 +2,7 @@
 # SIRT2i_Predictor: A machine learning-based tool to facilitate the discovery of novel SIRT2 inhibitors
 
 This repository contains code and accompanyed ML models described in this work:<br/> 
-> 1.	Djokovic, N.; Djuric, A.; Ruzic, D.; Srdic-Rajic, T.; Nikolic, K. Correlating Basal Gene Expression across Chemical Sensitivity Data to Screen for Novel Synergistic Interactors of HDAC Inhibitors in Pancreatic Carcinoma. Pharmaceuticals 2023, 16 (2), 294. [https://doi.org/10.3390/ph16020294] (https://doi.org/10.3390/ph16020294).
+> 1.	Djokovic, N.; Djuric, A.; Ruzic, D.; Srdic-Rajic, T.; Nikolic, K. Correlating Basal Gene Expression across Chemical Sensitivity Data to Screen for Novel Synergistic Interactors of HDAC Inhibitors in Pancreatic Carcinoma. Pharmaceuticals 2023, 16 (2), 294. https://doi.org/10.3390/ph16020294.
 
 Application is deployed on the Streamlit cloud for demo: [SIRT2i_Predictor](https://echonemanja-sirt2i-predictor-sl-cloud-sirt2i-predictor-88n0qw.streamlitapp.com/)
 
